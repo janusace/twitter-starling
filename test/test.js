@@ -7,51 +7,19 @@
  * Assumptions:		Your brother is named tim and has an eye patch.
  *
 */
-var	Twitter = require('../lib/twitter'),
-	config = require('../lib/config'),
-	TwitterHelper = require('../lib/helper');
+var	Twitter = require('../lib/helper'),
+	TestUtil = require('./util');
+				
+testUtil = new TestUtil();
 
-var	twit = new Twitter;
-
-console.log('------------------');
-
-twit.request( 	twit.resources.timeline.public,
-				{},
-				false,
-				function(result) {
-					console.log('------------------');
-					summariseTweets(result);
-				});
-	
-twit.user_timeline({ screen_name: 'sean_nicholls' }, function(result) {
-	console.log('------------------');
-	summariseTweets(result);
+// get a user's timeline
+twitter.timeline.user({ screen_name: 'sean_nicholls' }, function(result) {
+	console.log('-----------------[ twitter.timeline.user ]-----------------');
+	testUtil.summariseTwitter(result);
 });
-	
-	
-twit.rateLimitTimeLeft(function(result) {
-	console.log('time left: ' + result);
+
+// get users who retweeted a status
+twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result) {
+	console.log('-----------------[ twitter.retweets.statuses.by_user ]-----------------');
+	testUtil.summariseTwitter(result);
 });
-					
-console.log('------------------');
-	
-console.log('OAUTH: calls left: ' + twit.api_rate.remaining.oauth);
-console.log('API calls left: ' + twit.api_rate.remaining.unauthenticated);
-
-
-
-function summariseTweets(result) {
-
-	 if(result.isSuccess) {
-	 
-		 var body = result.message();
-	 
-		 for(var j=0; j<body.length; j++) {
-			 console.log('[' + body[j].user.screen_name + '] ' + body[j].text);
-		 }
-	 
-	 } else {
-		 console.log(result);
-	 }
-	 
-}
