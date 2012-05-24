@@ -9,6 +9,7 @@
 */
 
 function TestUtil() {}
+module.exports = TestUtil;
 
 TestUtil.prototype.summariseTwitter = function(result) {
 
@@ -29,7 +30,7 @@ TestUtil.prototype.summariseTwitter = function(result) {
 		 }
 	 
 	 } else {
-		 console.log(result);
+		 //console.log(result);
 	 }
 	 
 }
@@ -41,6 +42,3 @@ TestUtil.prototype.summariseTweet = function(tweet) {
 TestUtil.prototype.summariseUser = function(user) {
 	console.log('[' + user.screen_name + '] ');
 }
-
-
-module.exports = TestUtil;

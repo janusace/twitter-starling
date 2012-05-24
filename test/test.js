@@ -8,9 +8,16 @@
  *
 */
 var	Twitter = require('../lib/helper'),
-	TestUtil = require('./util');
+	TestUtil = require('./util'),
+	sys = require('sys');
 				
 testUtil = new TestUtil();
+
+// authenticate
+twitter.authenticate(	'consumer_key',
+						'consumer_secret',
+						'access_token_key',
+						'access_token_secret' );
 
 // get a user's timeline
 twitter.timeline.user({ screen_name: 'sean_nicholls' }, function(result) {
