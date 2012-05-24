@@ -7,11 +7,13 @@
  * Assumptions:		Your brother is named tim and has an eye patch.
  *
 */
-var	Twitter = require('../lib/helper'),
+var	Twitter = require('../lib/twitter'),
 	TestUtil = require('./util'),
 	sys = require('sys');
 				
 testUtil = new TestUtil();
+
+var twitter = new Twitter();
 
 // authenticate
 twitter.authenticate(	'consumer_key',
