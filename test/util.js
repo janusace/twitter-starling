@@ -11,28 +11,20 @@
 function TestUtil() {}
 module.exports = TestUtil;
 
-TestUtil.prototype.summariseTwitter = function(result) {
+TestUtil.prototype.summariseTwitter = function(tweets) {
 
-	 if(result.isSuccess) {
-	 
-		 var body = result.message();
-		 
-		 if(!(body instanceof Array)) {
-			body = [ body ];
-		 }
-			 
-		 for(var j=0; j<body.length; j++) {
-			 if(typeof body[j].user === 'undefined') {
-				TestUtil.prototype.summariseUser(body[j]);
-			 } else if(typeof body[j].status === 'undefined') {
-				TestUtil.prototype.summariseTweet(body[j]);
-			 }
-		 }
-	 
-	 } else {
-		 //console.log(result);
+	if(!(tweets instanceof Array)) {
+		tweets = [ tweets ];
 	 }
-	 
+		 
+	 for(var j=0; j<tweets.length; j++) {
+		 if(typeof tweets[j].user === 'undefined') {
+			TestUtil.prototype.summariseUser(tweets[j]);
+		 } else if(typeof tweets[j].status === 'undefined') {
+			TestUtil.prototype.summariseTweet(tweets[j]);
+		 }
+	 }
+	  
 }
 
 TestUtil.prototype.summariseTweet = function(tweet) {
