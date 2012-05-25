@@ -8,12 +8,11 @@
  *
 */
 var	Twitter = require('../lib/twitter'),
-	TestUtil = require('./util'),
-	sys = require('sys');
+	TestUtil = require('./util');
 				
-testUtil = new TestUtil();
-
-var twitter = new Twitter();
+var testUtil = new TestUtil(),
+	twitter = new Twitter(),
+	anotherTwitter = new Twitter();
 
 // authenticate
 twitter.authenticate(	'consumer_key',
@@ -21,8 +20,10 @@ twitter.authenticate(	'consumer_key',
 						'access_token_key',
 						'access_token_secret' );
 
-// get a user's timeline
-twitter.timeline.user({ screen_name: 'sean_nicholls' }, function(result) {
+// get a user's timeline, including retweets
+twitter.timeline.user({ screen_name:	'sean_nicholls',
+						include_rts:	'true' },
+						function(result) {
 
 	printHRule();
 	
@@ -34,7 +35,7 @@ twitter.timeline.user({ screen_name: 'sean_nicholls' }, function(result) {
 	
 });
 
-
+// get the users who retweeted a tweet with the specfied id
 twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result, parent) {
 
 	printHRule();
@@ -47,6 +48,18 @@ twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result,
 	
 });
 
+// get the public timeline
+anotherTwitter.timeline.public( null, function(result, parent) {
+
+	printHRule();
+
+	if(result.isSuccess) {
+		testUtil.summariseTwitter(result.message());
+	} else {
+		console.log('Error: ' + result.message());
+	}
+	
+});
 
 function printHRule() {
 
