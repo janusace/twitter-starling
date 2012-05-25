@@ -8,4 +8,6 @@ Still very much a work-in-progress.
 
 [Getting Started]
 
->node test
+run the following for an example:
+
+node test

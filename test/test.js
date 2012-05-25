@@ -28,7 +28,7 @@ twitter.timeline.user({ screen_name:	'sean_nicholls',
 	printHRule();
 	
 	if(result.isSuccess) {
-		testUtil.summariseTwitter(result.message());
+		testUtil.summariseTwitter(result.message(), '(user_timeline) ');
 	} else {
 		console.log('Error: ' + result.message());
 	}
@@ -41,7 +41,7 @@ twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result,
 	printHRule();
 
 	if(result.isSuccess) {
-		testUtil.summariseTwitter(result.message());
+		testUtil.summariseTwitter(result.message(), '(retweeted by) ');
 	} else {
 		console.log('Error: ' + result.message());
 	}
@@ -54,7 +54,7 @@ anotherTwitter.timeline.public( null, function(result, parent) {
 	printHRule();
 
 	if(result.isSuccess) {
-		testUtil.summariseTwitter(result.message());
+		testUtil.summariseTwitter(result.message(), '(public_timeline) ');
 	} else {
 		console.log('Error: ' + result.message());
 	}
