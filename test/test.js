@@ -50,22 +50,22 @@ twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result,
 });
 
 // get a user's timeline, including retweets
-authorisedTwitter.timeline.user({ screen_name:	'sean_nicholls',
-						include_rts:	'true' },
-						function(result) {
+authorisedTwitter.timeline.user({ 	screen_name:	'sean_nicholls',
+									include_rts:	'true' },
+									function(result) {
 
 	printHRule();
 	
 	if(result.isSuccess) {
 		testUtil.summariseTwitter(result.message(), '(user_timeline) ');
 	} else {
-		console.log('Error: ' + result.message());
+		printError(result.error); 
 	}
 	
 });
 
 /*
-// send a tweet (this should produce an error, without authentication);
+// send a tweet (this should produce an error without authentication);
 authorisedTwitter.statuses.create.standard( {status:	'hello world! this is a test of the Node.js twitter library on @github https://github.com/snicholls/TwitterRestClient'}, function(result, parent) {
 
 	printHRule();
