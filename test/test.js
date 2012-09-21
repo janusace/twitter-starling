@@ -15,15 +15,16 @@ var testUtil = new TestUtil(),
 	twitter = new Twitter();
 
 // NOTE: change the following to match your application settings!
-var credential = new Twitter.LoginCredential(	'consumer_key',
-												'consumer_secret',
-												'access_token_key',
-												'access_token_secret'	);
+var credential = new Twitter.LoginCredential(	'CmQ4jIlm1P0JlHo4cjntLQ',
+												'iBwv7HuUdaoTXdNGNxzraL7qAtqjNGfZUePdGtWsunk',
+												'10390782-QRfXzq1vkzUjt2eVy25qslN6XTKpE04Hd8QOjYYFl',
+												'Rj8B0yqgYhi8FHgG7Ltf6zsHAmjlRYvC97Vzvbvb7Ww'	);
 
 authorisedTwitter = new Twitter(credential);
 
 
 // get the public timeline
+debugger;
 authorisedTwitter.timeline.public( {}, function(result, parent) {
 
 	printHRule();
