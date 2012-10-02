@@ -24,11 +24,12 @@ var util = new Twitter.util();
 // 			THE TWITTER STREAMING API WILL NOT WORK WITHOUT SUPPLYING
 //			A VALID (NON-ANOYMOUS) AUTHENTICATION CREDENTIAL
 //
+/*
 var credential = new Twitter.LoginCredential(	'CONSUMER_KEY',
 												'CONSUMER_SECRET',
 												'ACCESS_TOKEN',
 												'ACCESS_TOKEN_SECRET'	);
-
+*/
 var credential = new Twitter.LoginCredential();
 
 var authorisedTwitter = new Twitter(credential);
@@ -53,23 +54,23 @@ authorisedTwitter.timeline.public( {}, function(result, parent) {
     
 });
 */
+
 // get the users who retweeted a tweet with the specfied id
-twitter.retweets.statuses.by_user({ id: '252941254906769400' }, function(result, parent) {
+twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result, parent) {
 
     if(result.isSuccess) {
         var tweets = result.message();
         for(var i=0; i<tweets.length; i++) {
-            //console.log(util.summariseTwitter(tweets[i], '(retweets by) '));
-            console.log('>' + tweets[i]);
+            console.log(util.summariseTwitter(tweets[i], '(retweets_by) '));
         }
     } else {
-        console.log("Error: " + result.message); 
+        console.log("Error: " + result.message()); 
     }
 	
     console.log('---------------------------');
     
 });
-/*
+
 // get a user's timeline, including retweets
 authorisedTwitter.timeline.user({ 	screen_name:	'BarackObama',
 									include_rts:	'false' },
@@ -78,16 +79,16 @@ authorisedTwitter.timeline.user({ 	screen_name:	'BarackObama',
     if(result.isSuccess) {
         var tweets = result.message();
         for(var i=0; i<tweets.length; i++) {
-            console.log(util.summariseTwitter(tweets[i], '(user_timeline) ' + tweets[i].id + ' '));
+            console.log(util.summariseTwitter(tweets[i], '(user_timeline) '));
         }
     } else {
-        console.log("Error: " + result.message); 
+        console.log("Error: " + result.message()); 
     }
 	
     console.log('---------------------------');
     
 });
-*/
+
 /* 
 // ENABLE AT YOUR OWN RISK!
 // send a tweet (this should produce an error without authentication);
