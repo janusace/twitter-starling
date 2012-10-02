@@ -30,6 +30,8 @@ Create the Twitter client:
 var authorisedTwitter = new Twitter(credential);
 ```
 
+## Examples
+
 Query the Twitter REST API:
 
 ```javascript
@@ -79,6 +81,16 @@ authorisedTwitter.stream.statuses.sample({}, function(result) {
 
 });
 ```
+## More examples
+
+From root source folder you can try out some examples in the ***test*** directory:
+
+```bash
+node test
+```
+
+this will execute some basic REST and Streaming functionality and is a good starting point if the above examples aren't detailed enough.
+
 
 ## Going Forward
 
