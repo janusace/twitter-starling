@@ -36,7 +36,7 @@ var authorisedTwitter = new Twitter(credential);
 /* =======================
  * =====[ REST API ] =====
  * ======================= */
-
+/*
 // get the public timeline
 authorisedTwitter.timeline.public( {}, function(result, parent) {
     
@@ -46,47 +46,48 @@ authorisedTwitter.timeline.public( {}, function(result, parent) {
             console.log(util.summariseTwitter(tweets[i], '(public_timeline) '));
         }
     } else {
-        console.log("Error1: " + result.message); 
+        console.log("Error: " + result.message); 
     }
 	
     console.log('---------------------------');
     
 });
-
+*/
 // get the users who retweeted a tweet with the specfied id
-twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result, parent) {
+twitter.retweets.statuses.by_user({ id: '252941254906769400' }, function(result, parent) {
 
     if(result.isSuccess) {
         var tweets = result.message();
         for(var i=0; i<tweets.length; i++) {
-            console.log(util.summariseTwitter(tweets[i], '(retweets by) '));
+            //console.log(util.summariseTwitter(tweets[i], '(retweets by) '));
+            console.log('>' + tweets[i]);
         }
     } else {
-        console.log("Error1: " + result.message); 
+        console.log("Error: " + result.message); 
     }
 	
     console.log('---------------------------');
     
 });
-
+/*
 // get a user's timeline, including retweets
-authorisedTwitter.timeline.user({ 	screen_name:	'sean_nicholls',
-									include_rts:	'true' },
+authorisedTwitter.timeline.user({ 	screen_name:	'BarackObama',
+									include_rts:	'false' },
 									function(result) {
 
     if(result.isSuccess) {
         var tweets = result.message();
         for(var i=0; i<tweets.length; i++) {
-            console.log(util.summariseTwitter(tweets[i], '(user_timeline) '));
+            console.log(util.summariseTwitter(tweets[i], '(user_timeline) ' + tweets[i].id + ' '));
         }
     } else {
-        console.log("Error1: " + result.message); 
+        console.log("Error: " + result.message); 
     }
 	
     console.log('---------------------------');
     
 });
-
+*/
 /* 
 // ENABLE AT YOUR OWN RISK!
 // send a tweet (this should produce an error without authentication);
@@ -102,9 +103,11 @@ authorisedTwitter.statuses.create.standard( { status:	'hello world! this is a te
 /* ============================
  * =====[ STREAMING API ] =====
  * ============================ */
-/*
+
 if(credential.isAnonymous) {
+
 	console.log("Cannot test the Twitter streaming API without an authenticated login.");
+	
 } else {
 	
 	// sample the public timeline
@@ -114,7 +117,6 @@ if(credential.isAnonymous) {
 		
 			try {
 				var tweet = JSON.parse(result.data);
-				
 				console.log(util.summariseTwitter(tweet, '(sample) '));
 			} catch (e) {
 				// best to just ignore it, eh?
@@ -128,27 +130,26 @@ if(credential.isAnonymous) {
 		}
 		
 	});
-
+	
+	/*
+    // track some keywords
+    authorisedTwitter.stream.statuses.filter(	{ track: ["Twitter","Facebook","YouTube"] },
+    											function(result) {
+    
+    	if(result.isSuccess) {
+    		
+    		try {
+    			var tweet = JSON.parse(result.data);
+    			console.log(util.summariseTwitter(tweet, '(filter) '));
+    		} catch (e) {
+    			// best to just ignore it, eh?
+    		}
+    		
+    	} else {
+    		
+    		console.log(result.error.message);
+    		
+    	}
+    });
+    */
 }
-*/
-/*
-// track some keywords
-authorisedTwitter.stream.statuses.filter(	{ track: ["Twitter","Facebook","YouTube"] },
-											function(result) {
-
-	if(result.isSuccess) {
-		
-		try {
-			var tweet = JSON.parse(result.data);
-			console.log(util.summariseTwitter(tweet, '(filter) '));
-		} catch (e) {
-			// best to just ignore it, eh?
-		}
-		
-	} else {
-		
-		console.log(result.error.message);
-		
-	}
-});
-*/
