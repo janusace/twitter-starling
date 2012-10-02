@@ -14,25 +14,34 @@ var	Twitter = require('../lib/twitter'),
 var testUtil = new TestUtil(),
 	twitter = new Twitter();
 
-// NOTE: change the following to match your application settings!
-var credential = new Twitter.LoginCredential(	'CmQ4jIlm1P0JlHo4cjntLQ',
-												'iBwv7HuUdaoTXdNGNxzraL7qAtqjNGfZUePdGtWsunk',
-												'10390782-QRfXzq1vkzUjt2eVy25qslN6XTKpE04Hd8QOjYYFl',
-												'Rj8B0yqgYhi8FHgG7Ltf6zsHAmjlRYvC97Vzvbvb7Ww'	);
+/*
+// NOTE:	change the following to match your application settings!
+// 			THE TWITTER STREAMING API WILL NOT WORK WITHOUT SUPPLYING
+//			A VALID (NON-ANOYMOUS) AUTHENTICATION CREDENTIAL
+//
+var credential = new Twitter.LoginCredential(	"MY_CONSUMER_KEY",
+												"MY_CONSUMER_SECRET",
+												"MY_TOKEN",
+												"MY_TOKEN_SECRET");
+*/
 
-authorisedTwitter = new Twitter(credential);
+var credential = new Twitter.LoginCredential();
 
+var authorisedTwitter = new Twitter(credential);
 
+/* =======================
+ * =====[ REST API ] =====
+ * ======================= */
+/*
 // get the public timeline
-debugger;
 authorisedTwitter.timeline.public( {}, function(result, parent) {
 
-	printHRule();
+	testUtil.printHRule();
 
 	if(result.isSuccess) {
 		testUtil.summariseTwitter(result.message(), '(public_timeline) ');
 	} else {
-		printError(result.error); 
+		testUtil.printError(result.error); 
 	}
 	
 });
@@ -40,12 +49,12 @@ authorisedTwitter.timeline.public( {}, function(result, parent) {
 // get the users who retweeted a tweet with the specfied id
 twitter.retweets.statuses.by_user({ id: '205263849622999040' }, function(result, parent) {
 
-	printHRule();
+	testUtil.printHRule();
 
 	if(result.isSuccess) {
 		testUtil.summariseTwitter(result.message(), '(retweeted by) ');
 	} else {
-		printError(result.error); 
+		testUtil.printError(result.error); 
 	}
 	
 });
@@ -55,31 +64,78 @@ authorisedTwitter.timeline.user({ 	screen_name:	'sean_nicholls',
 									include_rts:	'true' },
 									function(result) {
 
-	printHRule();
+	testUtil.printHRule();
 	
 	if(result.isSuccess) {
 		testUtil.summariseTwitter(result.message(), '(user_timeline) ');
 	} else {
-		printError(result.error); 
+		testUtil.printError(result.error); 
 	}
 	
 });
-
-/*
+*/
+/* 
+// ENABLE AT YOUR OWN RISK!
 // send a tweet (this should produce an error without authentication);
-authorisedTwitter.statuses.create.standard( {status:	'hello world! this is a test of the Node.js twitter library on @github https://github.com/snicholls/TwitterRestClient'}, function(result, parent) {
+authorisedTwitter.statuses.create.standard( { status:	'hello world! this is a test of the #Node.js twitter library, on #github at https://github.com/snicholls/TwitterRestClient'},
+											function(result, parent) {
 
-	printHRule();
+	testUtil.printHRule();
 
 	console.log(result);
 
 });
 */
 
-function printHRule() {
-	console.log('-------------------');
+
+/* ============================
+ * =====[ STREAMING API ] =====
+ * ============================ */
+
+if(credential.isAnonymous) {
+	console.log("Cannot test the Twitter streaming API without an authenticated login.");
+} else {
+	
+	// sample the public timeline
+	authorisedTwitter.stream.statuses.sample({}, function(result) {
+	
+		if(result.isSuccess) {
+		
+			try {
+				var tweet = JSON.parse(result.data);
+				testUtil.summariseTwitter(tweet, '(sample) ');
+			} catch (e) {
+				// best to just ignore it, eh?
+			}
+			
+		} else {
+			
+			console.log("Error: " + result.message);
+			
+		}
+		
+	});
+
 }
 
-function printError(error) {
-	console.log('Error (' + error.code + '): ' + error.message);
-}
+/*
+// track some keywords
+authorisedTwitter.stream.statuses.filter(	{ track: ["Twitter","Facebook","YouTube"] },
+											function(result) {
+
+	if(result.isSuccess) {
+		
+		try {
+			var tweet = JSON.parse(result.data);
+			testUtil.summariseTwitter(tweet, '(filter) ');
+		} catch (e) {
+			// best to just ignore it, eh?
+		}
+		
+	} else {
+		
+		console.log(result.error.message);
+		
+	}
+});
+*/
