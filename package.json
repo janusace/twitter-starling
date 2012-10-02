@@ -1,23 +1,31 @@
-{ 
-  "name": "TwitterRestClient", 
-  "version": "0.0.1",
-  "description": "Twitter rest API client for use with node.js", 
-  "keywords": ["twitter","streaming","oauth"], 
-  "homepage": "https://github.com/snicholls/TwitterRestClient", 
-  "author": "Sean Nicholls", 
-  "licenses": { 
-    "type": "MIT", 
-    "url": "https://github.com/snicholls/TwitterRestClient/blob/master/LICENSE"
-  },
-  "repository": { 
-    "type": "git", 
-    "url": "http://github.com/snicholls/TwitterRestClient.git"
-  }, 
-  "dependencies": { 
-    "oauth": ">=0.8.4", 
-    "cookies": "0.1.x",
-    "keygrip": "0.1.x"
-  }, 
-  "engines": {"node":">=0.4.0 < 0.7.0"}, 
-  "main": "./lib/twitter"
+{   "name":             "twitter-starling", 
+    "version":          "0.0.1",
+    "description":      "Twitter REST & Streaming client for use with node.js", 
+    
+    "keywords":         [   "twitter",
+                            "rest",
+                            "streaming",
+                            "api",
+                            "oauth"
+                        ], 
+                        
+    "homepage":         "https://github.com/seannicholls/twitter-starling", 
+    "author":           "Sean Nicholls", 
+    
+    "licenses":         {   "type":         "MIT", 
+                            "url":          "https://github.com/seannicholls/twitter-starling/blob/master/LICENSE"
+                        },
+    
+    "repository":       {   "type":         "git", 
+                            "url":          "https://github.com/seannicholls/twitter-starling.git"
+                        }, 
+    
+    "dependencies":     {   "oauth":        ">=0.8.4", 
+                            "request":      ">=2.11.4",
+                            "querystring":  ">=0.9.8"
+                        }, 
+    
+    "engines":          {   "node":">=0.6.18"   }, 
+    
+    "main": "./lib/twitter"
 }
