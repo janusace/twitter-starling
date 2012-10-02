@@ -1,5 +1,5 @@
 {   "name":             "twitter-starling", 
-    "version":          "0.0.1",
+    "version":          "0.0.2",
     "description":      "Twitter REST & Streaming client for use with node.js", 
     
     "keywords":         [   "twitter",
@@ -22,7 +22,7 @@
     
     "dependencies":     {   "oauth":        ">=0.8.4", 
                             "request":      ">=2.11.4",
-                            "querystring":  ">=0.9.8"
+                            "querystring":  ">=0.1"
                         }, 
     
     "engines":          {   "node":">=0.6.18"   }, 
